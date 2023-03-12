@@ -1,0 +1,243 @@
+%auth-button {
+  padding: 10px 10px 10px 37px;
+  flex-basis: content;
+  background-repeat: no-repeat;
+  background-position-x: 10px;
+  background-position-y: 10px;
+  @include font(1.4rem, $height: 1.6rem, $weight: 400);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.auth-buttons {
+  width: 250px;
+  display: inline-flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  border-left: 2px solid $color-light;
+}
+.auth-button-login {
+  @extend %auth-button;
+  background-color: $color-white;
+  background-image: url("../../assets/icons/login.svg");
+  color: $color-gray;
+  border: 1px solid rgba(184, 199, 214, 0.35);
+  transition: all 0.1s ease;
+  &:active {
+    transform: scale(0.9);
+  }
+}
+.auth-button-sign {
+  @extend %auth-button;
+  background-color: $color-permanent;
+  background-image: url("../../assets/icons/sign.svg");
+  color: $color-white;
+  border: 1px solid $color-permanent;
+  transition: all 0.1s ease;
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.button {
+  padding: 20px 24px 20px 57px;
+  color: $color-white;
+  @include font(1.4rem, $weight: 500);
+  background-color: $color-permanent;
+  background-repeat: no-repeat;
+  background-position-x: 24px;
+  background-position-y: center;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+  &:active {
+    transform: scale(0.9);
+  }
+  &_school {
+    background-image: url("../../assets/icons/school.svg");
+  }
+  &_basket {
+    background-image: url("../../assets/icons/basket.svg");
+  }
+  &_call {
+    padding: 16px 49px 16px 24px;
+    background-image: url("../../assets/icons/enter.svg");
+    background-position-x: 154px;
+  }
+  &_ok {
+    padding: 16px 49px 16px 24px;
+    background-image: url("../../assets/icons/ok.svg");
+    background-position-x: 100px;
+  }
+  &_back {
+    background-color: $color-white;
+    color: rgba(32, 56, 80, 0.65);
+    background-image: url("../../assets/icons/back.svg");
+  }
+  &_user {
+    padding: 10px;
+    background-color: $color-swamp;
+    &:disabled {
+      pointer-events: none;
+      user-select: none;
+      background-color: rgba($color: $color-swamp, $alpha: 0.5);
+    }
+  }
+  &_user-load {
+    background-color: $color-dark;
+  }
+  &_user-remove {
+    background-color: $color-alert;
+  }
+  &_cart {
+    padding: 16px 49px 16px 24px;
+    background-image: url("../../assets/icons/cart.svg");
+    background-position-x: 100px;
+  }
+  &_confirm {
+    padding: 10px;
+    min-width: 120px;
+    background-color: $color-swamp;
+  }
+  &_submit {
+    padding: 10px;
+    min-width: 120px;
+  }
+  &_cancel {
+    padding: 10px;
+    min-width: 120px;
+    background-color: $color-alert;
+  }
+  &_remove {
+    padding: 10px;
+    min-width: 120px;
+    background-color: $color-cherry;
+    &:disabled {
+      pointer-events: none;
+      user-select: none;
+      background-color: rgba($color: $color-title, $alpha: 0.5);
+    }
+  }
+}
+
+.button-light {
+  padding: 8px;
+  @include font(1.4rem, $weight: 400);
+  color: $color-gray;
+  background: $color-white;
+  border: 1px solid rgba(184, 199, 214, 0.35);
+  border-radius: 9px;
+  cursor: pointer;
+  transition: all 0.1s ease-in;
+  &_active {
+    border: 1px solid rgba(24, 100, 171, 0.5);
+    color: $color-permanent;
+  }
+  &:active {
+    transform: scale(0.9);
+  }
+  &_big {
+    padding: 20px;
+    @include font(1.4rem, $weight: 500);
+    border: 1.5px solid rgba(24, 100, 171, 0.5);
+    color: $color-gray;
+  }
+}
+
+.button-play {
+  display: inline-flex;
+  width: 34px;
+  height: 34px;
+  background-color: $color-white;
+  background-image: url("../../assets/icons/play-gray.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-x: 13px;
+  border-radius: 8px;
+  border: 1px solid $color-light;
+  transition: all 0.1s ease-in;
+  cursor: pointer;
+  &:active {
+    transform: scale(0.9);
+  }
+  &_active {
+    background-color: $color-permanent;
+    background-image: url("../../assets/icons/play.svg");
+  }
+}
+
+.button-number {
+  width: 30px;
+  height: 30px;
+  @include font(1.4rem, $weight: 400);
+  color: rgba($color-title, 1);
+  background: $color-bg;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.1s ease-in;
+  cursor: pointer;
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.button-start {
+  padding: 8px;
+  @include font(1.4rem, $weight: 400);
+  color: $color-permanent;
+  background: $color-white;
+  border: 1px solid rgba(184, 199, 214, 0.35);
+  border-radius: 9px;
+  transition: all 0.1s ease-in;
+  cursor: pointer;
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.button-auth {
+  padding: 15px 25px 15px 59px;
+  width: 50%;
+  font-family: "Nunito", Verdana, sans-serif;
+  @include font(1.8rem, $weight: 600);
+  text-transform: uppercase;
+  color: rgba(32, 56, 80, 0.65);
+  background-color: $color-milk;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  border: none;
+  cursor: pointer;
+  &_login {
+    background-image: url("../../assets/icons/login-form-gray.svg");
+    border-bottom: 1px solid $color-light;
+    border-right: 1px solid $color-light;
+    &.active {
+      background-image: url("../../assets/icons/login-form.svg");
+      border: none;
+    }
+  }
+  &_sign {
+    background-image: url("../../assets/icons/sign-form-gray.svg");
+    border-bottom: 1px solid $color-light;
+    border-left: 1px solid $color-light;
+    &.active {
+      background-image: url("../../assets/icons/sign-form.svg");
+      border: none;
+    }
+  }
+  &.active {
+    background-color: $color-white;
+    color: $color-title;
+  }
+}
+
+.auth-button {
+  padding: 16px 24px;
+  width: 100%;
+  &:disabled {
+    pointer-events: none;
+    user-select: none;
+    background-color: rgba($color: $color-permanent, $alpha: 0.5);
+  }
+}

@@ -1,0 +1,26 @@
+.search {
+  display: inline-flex;
+  @include media-netbook {
+    padding: 10px 0;
+  }
+}
+
+.search__field {
+  padding: 3px;
+  width: 60px;
+  height: 24px;
+  border: none;
+  font-size: 14px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.search__button {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: $color-white;
+  background-image: url("../../assets/icons/search.svg");
+  background-repeat: no-repeat;
+}

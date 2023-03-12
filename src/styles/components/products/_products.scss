@@ -1,0 +1,39 @@
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.products-list__item {
+  margin: 5px;
+  max-width: 20%;
+  min-width: 100px;
+  flex-grow: 1;
+  border: 1px solid $color-dark;
+  border-radius: 5px;
+  text-align: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 5px $color-dark;
+  }
+}
+
+.product-cart {
+  padding: 5px;
+  width: 100%;
+}
+
+.product-cart__title {
+  text-align: center;
+}
+
+.product-cart__content {
+  max-width: 100%;
+  min-height: 200px;
+}
+
+.product-cart__image-preview {
+  width: 100%;
+  object-fit: cover;
+}

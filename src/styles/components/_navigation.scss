@@ -1,0 +1,27 @@
+.navigation {
+  display: flex;
+  @include font(1.4rem, $weight: 400);
+  @include media-netbook {
+    flex-direction: column;
+    justify-content: space-around;
+    height: 200px;
+  }
+}
+
+.navigation__item {
+  &:after {
+    content: "";
+    display: inline-flex;
+    width: 6px;
+    height: 13px;
+    background-image: url("../../assets/icons/dash.svg");
+  }
+}
+
+.navigation__link {
+  color: $color-gray;
+  padding: 15px;
+  &:visited {
+    color: $color-gray;
+  }
+}

@@ -1,0 +1,12 @@
+.checkbox {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  background-color: $color-white;
+  border: 1px solid $color-title;
+  &_active {
+    background-image: url("../../assets/icons/check.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

@@ -1,0 +1,18 @@
+@mixin font ($size, $height: $size, $weight: bold, $style: normal) {
+  font-size: $size;
+  font-style: $style;
+  font-weight: $weight;
+  line-height: $height;
+}
+
+@mixin media-laptop {
+  @media (max-width: $content-laptop) { @content; }
+}
+
+@mixin media-netbook {
+  @media (max-width: $content-netbook) { @content; }
+}
+
+@mixin media-tablet {
+  @media (max-width: $content-tablet) { @content; }
+}

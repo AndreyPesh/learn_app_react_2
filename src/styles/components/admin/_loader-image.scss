@@ -1,0 +1,25 @@
+.loader-image {
+  // max-width: 50%;
+  text-align: center;
+}
+
+.loader-image__input {
+  display: none;
+}
+
+.loader-image__preview {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 250px;
+  overflow: auto;  
+}
+
+.loader-image__preview-item {
+  position: relative;
+}
+
+.loader-image__icon {
+  width: 100px;
+  height: 100px;
+}

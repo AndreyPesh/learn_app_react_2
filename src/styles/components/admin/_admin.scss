@@ -1,0 +1,36 @@
+.border {
+  border: 3px solid black;
+}
+
+.green {
+  background: $color-gray;
+}
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
+
+.list-products {
+  position: relative;
+  min-height: 350px;
+  overflow: hidden;
+}
+
+.products {
+  position: absolute;
+  display: flex;
+  flex-wrap: nowrap;
+  min-width: 100%;
+  height: 100%;
+  transition: translate 0.3s ease;
+}
+
+.products__item {
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+}

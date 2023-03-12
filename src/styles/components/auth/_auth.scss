@@ -1,0 +1,85 @@
+%before-input {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  top: 46px;
+  left: 10px;
+  height: 24px;
+  width: 29px;
+  background-color: $color-milk;
+  border-right: 2px solid $color-light;
+}
+
+.auth {
+  min-height: calc(100vh - 290px);
+  display: flex;
+  justify-content: center;
+}
+
+.auth__forms {
+  min-width: 350px;
+  background: $color-white;
+  margin-top: 30%;
+}
+
+.auth__header {
+  display: inline-flex;
+  width: 100%;
+}
+
+.auth__login-form {
+  padding: 25px;
+}
+
+.auth__field-form {
+  position: relative;
+  padding-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  @include font(1.4rem, $height: 1.8rem, $weight: 500);
+  & > * {
+    color: $color-title;
+  }  
+  &_login {
+    :before {
+      @extend %before-input;
+      background-image: url("../../../assets/icons/person.svg");
+    }
+  }
+  &_password {
+    :before {
+      @extend %before-input;
+      background-image: url("../../../assets/icons/lock_open.svg");
+    }
+  }
+}
+
+.auth__input {
+  margin-top: 15px;
+  padding: 15px 15px 15px 53px;
+  background-color: $color-milk;
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  color: $color-gray;
+  outline: none;
+  border: none;
+  &:focus {
+    box-shadow: 0px 0px 2px $color-gray;
+  }
+  &_text {
+    padding-left: 15px;
+  }
+}
+
+.auth__error {
+  margin: 0;
+  padding: 5px;
+  color: $color-error;
+  &_response {
+    padding: 10px;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}

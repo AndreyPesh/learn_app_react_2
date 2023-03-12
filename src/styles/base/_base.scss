@@ -1,0 +1,100 @@
+html {
+  font-size: 10px;
+  font-family: "Roboto";
+}
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul > li {
+  padding: 0;
+  list-style: none;
+}
+
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px $color-milk inset !important;
+  -webkit-text-fill-color: $color-gray !important;
+}
+
+body {
+  &.active {
+    overflow: hidden;
+  }
+}
+
+#root {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.title {
+  font-family: "Nunito";
+  color: $color-title;
+  @include font(2.8rem, $weight: 800);
+  text-transform: uppercase;
+  &_center {
+    text-align: center;
+  }
+  &_blue {
+    color: $color-permanent;
+  }
+}
+
+.title-bold {
+  font-family: "Nunito-Bold", Verdana, sans-serif;
+  @include font(4.6rem, $weight: 400);
+  color: $color-dark;
+}
+
+.dark-bg {
+  background: $color-bg;
+}
+
+.counter {
+  padding: 0 25px;
+  @include font(1.4rem, $weight: 400);
+  color: rgba(32, 56, 80, 0.65);
+  border-left: 1px solid $color-light;
+}
+
+.switcher {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: url("../../assets/icons/arrow_question.svg") no-repeat center;
+  cursor: pointer;
+  &_active {
+    transform: rotate(180deg);
+  }
+}
+
+.container {
+  margin: 0 auto;
+  padding: $container-padding;
+  max-width: $content-width;
+  @include font(1.4rem, $weight: 400);
+}
+
+.cross-close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url("../../assets/icons/cross-exit.svg") no-repeat center;
+  background-size: contain;
+  border-radius: 2px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 5px $color-gray;
+  }
+}

@@ -1,0 +1,64 @@
+.header {
+  position: relative;
+  margin: 0 auto;
+  padding: $container-padding;
+  max-width: $content-width;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__content {
+  padding-left: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: right 0.3s ease-in;
+  z-index: 2000;
+  @include media-netbook{
+    padding-left: 0;
+    position: absolute;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: calc(100vh - 80px);
+    top: 80px;
+    right: -200%;
+    background-color: $color-bg;
+    overflow-y: scroll;
+  }
+  &.active {
+    right: 0;
+  }
+}
+
+.header__link {
+  display: inline-flex;
+  height: 40px;
+  &:visited {
+    color: $color-dark;
+  }
+}
+
+.header__brand {
+  position: relative;
+  margin: 0;
+  padding-left: 48px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  background: url("../../assets/logo.svg") no-repeat;
+  background-size: contain;
+  color: $color-dark;
+  @include font(2.4rem);
+  font-family: "Nunito-bold",Verdana, sans-serif;
+  &:after {
+    content: "";
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    left: 160px;
+    background-color: $color-light;
+  }
+}
