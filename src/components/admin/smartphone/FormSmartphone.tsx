@@ -34,11 +34,11 @@ const FormSmartphone = () => {
   const formSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const unitedDataSmartphone = { ...dataSmartphone, images };
-    console.log(unitedDataSmartphone);
+
     // const form = addDataToDataForm(unitedDataSmartphone);
 
     // await addSmartphone(form);
-    // setDataSmartphone(initSmartphoneData);
+
     dispatch(resetDataSmartphone());
     setListLoadedImages([]);
     setImages([]);
