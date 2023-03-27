@@ -5,7 +5,7 @@ import {
   useState,
   SetStateAction,
   Dispatch,
-  useEffect,
+  useEffect
 } from 'react';
 import { SmartphoneDescription } from '../../../types/interface';
 import { filterImages } from '../../../utils/admin/helper';
@@ -27,7 +27,6 @@ const LoadImages = ({ setImagesToState, images }: LoadImagesProps) => {
 
   const fileHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
-    console.log('change event ', files);
     if (files) {
       const arrayFiles = Array.from(files);
       arrayFiles.map((file) => loadFile(file));
@@ -59,13 +58,6 @@ const LoadImages = ({ setImagesToState, images }: LoadImagesProps) => {
     setListLoadedFiles(() => filterImages(listLoadedFiles, index));
   };
 
-  useEffect(() => {
-    if (images) {
-      // refInput.current?.click()
-      const fileEvent = new CustomEvent('change', { bubbles: true, detail: images });
-      refInput.current?.dispatchEvent(fileEvent);
-    }
-  }, []);
 
   return (
     <div className="loader-image">

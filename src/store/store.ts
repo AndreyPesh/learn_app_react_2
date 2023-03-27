@@ -7,12 +7,14 @@ import userReducer from './slice/userSlice';
 import modalReducer from './slice/modalSlice';
 import { smartphoneApi } from './api/admin/smartphoneApi';
 import { smartphoneBrandApi } from './api/admin/smartphoneBrandApi';
+import smartphoneDataSlice from './slice/adminData/smartphoneDataSlice';
 
 export const store = configureStore({
   reducer: {
     loginFormData: loginFormReducer,
     userData: userReducer,
     modal: modalReducer,
+    smartphoneDataForm: smartphoneDataSlice,
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [productsApi.reducerPath]: productsApi.reducer,
