@@ -5,20 +5,21 @@ import {
   useState,
   SetStateAction,
   Dispatch,
-  useEffect
+  useEffect,
 } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../hooks/store';
 import { SmartphoneDescription } from '../../../types/interface';
 import { filterImages } from '../../../utils/admin/helper';
 import ImagePreview from './ImagePreview';
 
 interface LoadImagesProps {
-  setImagesToState: Dispatch<SetStateAction<SmartphoneDescription>>;
-  images?: FileList;
+  setImagesToState: Dispatch<SetStateAction<Array<File>>>;
+  setListLoadedFiles: Dispatch<SetStateAction<Array<string>>>;
+  listLoadedFiles: Array<string>;
 }
 
-const LoadImages = ({ setImagesToState, images }: LoadImagesProps) => {
+const LoadImages = ({ setImagesToState, setListLoadedFiles, listLoadedFiles }: LoadImagesProps) => {
   const refInput = useRef<HTMLInputElement>(null);
-  const [listLoadedFiles, setListLoadedFiles] = useState<string[]>([]);
 
   const btnAddHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -30,10 +31,7 @@ const LoadImages = ({ setImagesToState, images }: LoadImagesProps) => {
     if (files) {
       const arrayFiles = Array.from(files);
       arrayFiles.map((file) => loadFile(file));
-      setImagesToState((prevState) => ({
-        ...prevState,
-        images: [...prevState.images, ...arrayFiles],
-      }));
+      setImagesToState((prevState) => prevState.concat(arrayFiles));
     }
     if (refInput.current) refInput.current.value = '';
   };
@@ -51,13 +49,9 @@ const LoadImages = ({ setImagesToState, images }: LoadImagesProps) => {
   };
 
   const removeImage = (index: number) => {
-    setImagesToState((prevState) => ({
-      ...prevState,
-      images: filterImages(prevState.images, index),
-    }));
+    setImagesToState((prevState) => filterImages(prevState, index));
     setListLoadedFiles(() => filterImages(listLoadedFiles, index));
   };
-
 
   return (
     <div className="loader-image">

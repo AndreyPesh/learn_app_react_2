@@ -36,9 +36,10 @@ export const smartphoneDataSlice = createSlice({
       state.brand = action.payload;
       return state;
     },
+    resetDataSmartphone: (state: SmartphoneDescription) => (state = initialState),
   },
 });
 
-export const { addDataSmartphone, addBrandSmartphone } = smartphoneDataSlice.actions;
+export const { addDataSmartphone, addBrandSmartphone, resetDataSmartphone } = smartphoneDataSlice.actions;
 
 export default smartphoneDataSlice.reducer;

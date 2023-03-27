@@ -2,7 +2,10 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/store';
 import { useToasty } from '../../../hooks/useToasty';
 import { useAddSmartphoneMutation } from '../../../store/api/admin/smartphoneApi';
-import { addDataSmartphone } from '../../../store/slice/adminData/smartphoneDataSlice';
+import {
+  addDataSmartphone,
+  resetDataSmartphone,
+} from '../../../store/slice/adminData/smartphoneDataSlice';
 import { SmartphoneDescription } from '../../../types/interface';
 import { addDataToDataForm } from '../../../utils/admin/helper';
 import { initSmartphoneData } from '../../../utils/constants';
@@ -10,8 +13,9 @@ import LoadImages from '../images/LoadImages';
 import BrandList from './additional/BrandList';
 
 const FormSmartphone = () => {
-  // const [dataSmartphone, setDataSmartphone] = useState<SmartphoneDescription>(initSmartphoneData);
   const dataSmartphone = useAppSelector((state) => state.smartphoneDataForm);
+  const [images, setImages] = useState<Array<File>>([]);
+  const [listLoadedImages, setListLoadedImages] = useState<Array<string>>([]);
   const dispatch = useAppDispatch();
   const [addSmartphone, { isError, isSuccess }] = useAddSmartphoneMutation();
 
@@ -25,23 +29,19 @@ const FormSmartphone = () => {
   const formHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
     dispatch(addDataSmartphone({ name, value, type, checked }));
-    /*
-      state across useState
-    */
-    // setDataSmartphone((prevData) => ({
-    //   ...prevData,
-    //   [name]: type === 'checkbox' ? checked : value,
-    // }));
   };
 
   const formSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // console.log(dataSmartphone);
-
-    // const form = addDataToDataForm(dataSmartphone);
+    const unitedDataSmartphone = { ...dataSmartphone, images };
+    console.log(unitedDataSmartphone);
+    // const form = addDataToDataForm(unitedDataSmartphone);
 
     // await addSmartphone(form);
     // setDataSmartphone(initSmartphoneData);
+    dispatch(resetDataSmartphone());
+    setListLoadedImages([]);
+    setImages([]);
   };
 
   return (
@@ -68,7 +68,6 @@ const FormSmartphone = () => {
             onChange={formHandler}
           />
         </div>
-        {/* <BrandList selectBrand={setDataSmartphone} /> */}
         <BrandList />
         <div className="form__field">
           <label>Price:</label>
@@ -130,7 +129,11 @@ const FormSmartphone = () => {
             onChange={formHandler}
           />
         </div>
-        {/* <LoadImages setImagesToState={setDataSmartphone} /> */}
+        <LoadImages
+          setImagesToState={setImages}
+          setListLoadedFiles={setListLoadedImages}
+          listLoadedFiles={listLoadedImages}
+        />
         <div className="form__button-submit">
           <button className="button button_submit " type="submit">
             Save
