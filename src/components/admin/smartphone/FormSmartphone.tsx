@@ -6,16 +6,13 @@ import {
   addDataSmartphone,
   resetDataSmartphone,
 } from '../../../store/slice/adminData/smartphoneDataSlice';
-import { SmartphoneDescription } from '../../../types/interface';
 import { addDataToDataForm } from '../../../utils/admin/helper';
-import { initSmartphoneData } from '../../../utils/constants';
 import LoadImages from '../images/LoadImages';
 import BrandList from './additional/BrandList';
 
 const FormSmartphone = () => {
   const dataSmartphone = useAppSelector((state) => state.smartphoneDataForm);
-  const [images, setImages] = useState<Array<File>>([]);
-  const [listLoadedImages, setListLoadedImages] = useState<Array<string>>([]);
+  const [images, setImages] = useState<Array<string>>([]);
   const dispatch = useAppDispatch();
   const [addSmartphone, { isError, isSuccess }] = useAddSmartphoneMutation();
 
@@ -34,13 +31,11 @@ const FormSmartphone = () => {
   const formSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const unitedDataSmartphone = { ...dataSmartphone, images };
+    const form = addDataToDataForm(unitedDataSmartphone);
 
-    // const form = addDataToDataForm(unitedDataSmartphone);
-
-    // await addSmartphone(form);
+    await addSmartphone(form);
 
     dispatch(resetDataSmartphone());
-    setListLoadedImages([]);
     setImages([]);
   };
 
@@ -129,11 +124,7 @@ const FormSmartphone = () => {
             onChange={formHandler}
           />
         </div>
-        <LoadImages
-          setImagesToState={setImages}
-          setListLoadedFiles={setListLoadedImages}
-          listLoadedFiles={listLoadedImages}
-        />
+        <LoadImages setImagesToState={setImages} images={images} />
         <div className="form__button-submit">
           <button className="button button_submit " type="submit">
             Save

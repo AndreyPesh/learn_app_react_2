@@ -2,23 +2,18 @@ import {
   useRef,
   MouseEvent,
   ChangeEvent,
-  useState,
   SetStateAction,
   Dispatch,
-  useEffect,
 } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../hooks/store';
-import { SmartphoneDescription } from '../../../types/interface';
 import { filterImages } from '../../../utils/admin/helper';
 import ImagePreview from './ImagePreview';
 
 interface LoadImagesProps {
-  setImagesToState: Dispatch<SetStateAction<Array<File>>>;
-  setListLoadedFiles: Dispatch<SetStateAction<Array<string>>>;
-  listLoadedFiles: Array<string>;
+  setImagesToState: Dispatch<SetStateAction<Array<string>>>;
+  images: Array<string>;
 }
 
-const LoadImages = ({ setImagesToState, setListLoadedFiles, listLoadedFiles }: LoadImagesProps) => {
+const LoadImages = ({ setImagesToState, images }: LoadImagesProps) => {
   const refInput = useRef<HTMLInputElement>(null);
 
   const btnAddHandler = (event: MouseEvent<HTMLButtonElement>) => {
@@ -31,7 +26,6 @@ const LoadImages = ({ setImagesToState, setListLoadedFiles, listLoadedFiles }: L
     if (files) {
       const arrayFiles = Array.from(files);
       arrayFiles.map((file) => loadFile(file));
-      setImagesToState((prevState) => prevState.concat(arrayFiles));
     }
     if (refInput.current) refInput.current.value = '';
   };
@@ -43,21 +37,20 @@ const LoadImages = ({ setImagesToState, setListLoadedFiles, listLoadedFiles }: L
       const { target } = event;
       if (target && target.result && typeof target.result === 'string') {
         const fileBlob = target.result;
-        setListLoadedFiles((prevState) => [...prevState, fileBlob]);
+        setImagesToState((prevState) => prevState.concat(fileBlob));
       }
     };
   };
 
   const removeImage = (index: number) => {
     setImagesToState((prevState) => filterImages(prevState, index));
-    setListLoadedFiles(() => filterImages(listLoadedFiles, index));
   };
 
   return (
     <div className="loader-image">
       <div className="loader-image__preview">
-        {listLoadedFiles &&
-          listLoadedFiles.map((file, index) => (
+        {images &&
+          images.map((file, index) => (
             <ImagePreview key={index} file={file} remove={() => removeImage(index)} />
           ))}
       </div>

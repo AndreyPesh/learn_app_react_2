@@ -20,7 +20,7 @@ export interface SmartphoneDescription {
   frequency: string;
   memory: string;
   nfc: boolean;
-  images: File[];
+  images: string[];
 }
 
 export interface SmartphoneData {
