@@ -5,6 +5,7 @@ import customFetchBase from '../customFetchBase/customFetchBase';
 export const smartphoneBrandApi = createApi({
   reducerPath: 'smartphoneBrandApi',
   baseQuery: customFetchBase,
+  tagTypes: ['Brand'],
   endpoints: (builder) => ({
     getBrands: builder.query<BrandData[], null>({
       query() {
@@ -14,6 +15,7 @@ export const smartphoneBrandApi = createApi({
           credentials: 'include',
         };
       },
+      providesTags: ['Brand'],
     }),
     addBrand: builder.mutation<void, {brand: string}>({
       query(brand) {
@@ -23,7 +25,8 @@ export const smartphoneBrandApi = createApi({
           body: brand,
           credentials: 'include'
         }
-      }
+      },
+      invalidatesTags: ['Brand']
     })
   }),
 });

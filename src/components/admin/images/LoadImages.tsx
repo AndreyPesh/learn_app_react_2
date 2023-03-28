@@ -2,23 +2,19 @@ import {
   useRef,
   MouseEvent,
   ChangeEvent,
-  useState,
   SetStateAction,
   Dispatch,
-  useEffect,
 } from 'react';
-import { SmartphoneDescription } from '../../../types/interface';
 import { filterImages } from '../../../utils/admin/helper';
 import ImagePreview from './ImagePreview';
 
 interface LoadImagesProps {
-  setImagesToState: Dispatch<SetStateAction<SmartphoneDescription>>;
-  images?: FileList;
+  setImagesToState: Dispatch<SetStateAction<Array<string>>>;
+  images: Array<string>;
 }
 
 const LoadImages = ({ setImagesToState, images }: LoadImagesProps) => {
   const refInput = useRef<HTMLInputElement>(null);
-  const [listLoadedFiles, setListLoadedFiles] = useState<string[]>([]);
 
   const btnAddHandler = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -27,14 +23,9 @@ const LoadImages = ({ setImagesToState, images }: LoadImagesProps) => {
 
   const fileHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
-    console.log('change event ', files);
     if (files) {
       const arrayFiles = Array.from(files);
       arrayFiles.map((file) => loadFile(file));
-      setImagesToState((prevState) => ({
-        ...prevState,
-        images: [...prevState.images, ...arrayFiles],
-      }));
     }
     if (refInput.current) refInput.current.value = '';
   };
@@ -46,32 +37,20 @@ const LoadImages = ({ setImagesToState, images }: LoadImagesProps) => {
       const { target } = event;
       if (target && target.result && typeof target.result === 'string') {
         const fileBlob = target.result;
-        setListLoadedFiles((prevState) => [...prevState, fileBlob]);
+        setImagesToState((prevState) => prevState.concat(fileBlob));
       }
     };
   };
 
   const removeImage = (index: number) => {
-    setImagesToState((prevState) => ({
-      ...prevState,
-      images: filterImages(prevState.images, index),
-    }));
-    setListLoadedFiles(() => filterImages(listLoadedFiles, index));
+    setImagesToState((prevState) => filterImages(prevState, index));
   };
-
-  useEffect(() => {
-    if (images) {
-      // refInput.current?.click()
-      const fileEvent = new CustomEvent('change', { bubbles: true, detail: images });
-      refInput.current?.dispatchEvent(fileEvent);
-    }
-  }, []);
 
   return (
     <div className="loader-image">
       <div className="loader-image__preview">
-        {listLoadedFiles &&
-          listLoadedFiles.map((file, index) => (
+        {images &&
+          images.map((file, index) => (
             <ImagePreview key={index} file={file} remove={() => removeImage(index)} />
           ))}
       </div>

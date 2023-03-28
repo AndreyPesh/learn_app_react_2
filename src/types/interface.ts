@@ -14,13 +14,13 @@ export interface SmartphoneDescription {
   model: string;
   display: string;
   brand: string;
-  price: number;
-  year: number;
+  price: string;
+  year: string;
   cpu: string;
-  frequency: number;
-  memory: number;
+  frequency: string;
+  memory: string;
   nfc: boolean;
-  images: File[];
+  images: string[];
 }
 
 export interface SmartphoneData {

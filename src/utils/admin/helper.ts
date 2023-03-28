@@ -31,7 +31,10 @@ export const addDataToDataForm = (dataSmartphone: SmartphoneDescription) => {
     const dataField = dataSmartphone[key];
 
     if (Array.isArray(dataField)) {
-      dataField.map((image) => formData.append('images', image));
+      dataField.map((image) => {
+        const imageFile = dataURLtoFile(image);
+        formData.append('images', imageFile);
+      });
     } else if (typeof dataField === 'number' || typeof dataField === 'boolean') {
       formData.append(key, String(dataField));
     } else {
@@ -41,11 +44,41 @@ export const addDataToDataForm = (dataSmartphone: SmartphoneDescription) => {
   return formData;
 };
 
-export const filterProductsByStatus = <T extends Array<string>>(products: T, id: string, status: boolean) => {
+export const filterProductsByStatus = <T extends Array<string>>(
+  products: T,
+  id: string,
+  status: boolean
+) => {
   const cloneProducts = [...products];
-      if (status) {
-        cloneProducts.push(id);
-        return cloneProducts;
-      }
-      return cloneProducts.filter((product) => product !== id);
+  if (status) {
+    cloneProducts.push(id);
+    return cloneProducts;
+  }
+  return cloneProducts.filter((product) => product !== id);
 };
+
+function dataURLtoFile(dataUrl: string) {
+  const data = dataUrl.split(',');
+  const dataAboutFile = data[0].split(';')[0].split('/');
+  const extension = dataAboutFile.pop() as string;
+  const filename = generateNameImage(extension);
+
+  const mimeType = data[0].match(/:(.*?);/)![1];
+  const baseStr = window.atob(data[1]);
+  let counter = baseStr.length;
+  let u8array = new Uint8Array(counter);
+
+  while (counter--) {
+    u8array[counter] = baseStr.charCodeAt(counter);
+  }
+
+  return new File([u8array], filename, { type: mimeType });
+}
+
+function generateNameImage(extension: string) {
+  const maxIndexId = 5000;
+  const minIndexId = 1;
+  const time = Date.now().toString();
+  const randomId = Math.random() * (maxIndexId - minIndexId) + minIndexId;
+  return `${randomId}_${time}.${extension}`;
+}
