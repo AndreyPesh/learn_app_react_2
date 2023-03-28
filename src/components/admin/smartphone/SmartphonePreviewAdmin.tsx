@@ -10,7 +10,6 @@ interface SmartphonePreviewAdminProps {
 }
 
 const SmartphonePreviewAdmin = ({ data, setSelectedProducts }: SmartphonePreviewAdminProps) => {
-
   const toggleProductToRemove = ({ status }: CheckboxHandlerParams) => {
     setSelectedProducts((prevProducts) => {
       return filterProductsByStatus(prevProducts, data.id, status);
@@ -19,7 +18,7 @@ const SmartphonePreviewAdmin = ({ data, setSelectedProducts }: SmartphonePreview
 
   return (
     <div className="list-product-admin__item">
-      {data.brand.brand + ' ' + data.model}
+      {data.brand && data.brand.brand ? data.brand.brand + ' ' + data.model : 'Unknown'}
       <div className="list-product-admin__actions">
         <UpdateButton id={data.id}/>
         <Checkbox checkboxHandler={toggleProductToRemove} />
