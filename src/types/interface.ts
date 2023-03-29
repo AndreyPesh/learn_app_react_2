@@ -27,11 +27,11 @@ export interface SmartphoneData {
   id: string;
   model: string;
   display: string;
-  price: number;
-  year: number;
+  price: string;
+  year: string;
   cpu: string;
-  frequency: number;
-  memory: number;
+  frequency: string;
+  memory: string;
   nfc: boolean;
   brand: BrandData;
   images: ImageData[];

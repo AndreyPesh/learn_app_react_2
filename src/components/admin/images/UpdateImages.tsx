@@ -1,5 +1,12 @@
 import axios from 'axios';
-import { useEffect, useRef, useState, MouseEvent, ChangeEvent } from 'react';
+import {
+  useEffect,
+  useRef,
+  MouseEvent,
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+} from 'react';
 import { ImageData } from '../../../types/interface';
 import { filterImages } from '../../../utils/admin/helper';
 import { BASE_URL } from '../../../utils/constants';
@@ -7,11 +14,11 @@ import ImagePreview from './ImagePreview';
 
 interface UpdateImagesProps {
   imagesList: ImageData[];
+  setUpdatedImages: Dispatch<SetStateAction<string[]>>;
+  updatedImages: Array<string>
 }
 
-const UpdateImages = ({ imagesList }: UpdateImagesProps) => {
-  const [listImageFile, setListImageFile] = useState<Array<File>>([]);
-  const [images, setImage] = useState<Array<string>>([]);
+const UpdateImages = ({ imagesList, updatedImages, setUpdatedImages }: UpdateImagesProps) => {
   const refInput = useRef<HTMLInputElement>(null);
 
   const btnAddHandler = (event: MouseEvent<HTMLButtonElement>) => {
@@ -24,7 +31,6 @@ const UpdateImages = ({ imagesList }: UpdateImagesProps) => {
     if (files) {
       const arrayFiles = Array.from(files);
       arrayFiles.map((file) => loadFile(file));
-      setListImageFile((prevState) => prevState.concat(arrayFiles));
     }
     if (refInput.current) refInput.current.value = '';
   };
@@ -36,14 +42,13 @@ const UpdateImages = ({ imagesList }: UpdateImagesProps) => {
       const { target } = event;
       if (target && target.result && typeof target.result === 'string') {
         const fileBlob = target.result;
-        setImage((prevState) => [...prevState, fileBlob]);
+        setUpdatedImages((prevState) => [...prevState, fileBlob]);
       }
     };
   };
 
   const removeImage = (index: number) => {
-    setListImageFile((prevState) => filterImages(prevState, index));
-    setImage((prevState) => filterImages(prevState, index));
+    setUpdatedImages((prevState) => filterImages(prevState, index));
   };
 
   useEffect(() => {
@@ -58,8 +63,7 @@ const UpdateImages = ({ imagesList }: UpdateImagesProps) => {
         reader.onload = () => {
           const { result } = reader;
           if (result && typeof result === 'string') {
-            setListImageFile((prevState) => [...prevState, new File([result], imageData.name)]);
-            setImage((prevState) => [...prevState, result]);
+            setUpdatedImages((prevState) => [...prevState, result]);
           }
         };
       });
@@ -70,8 +74,8 @@ const UpdateImages = ({ imagesList }: UpdateImagesProps) => {
   return (
     <div className="loader-image">
       <div className="loader-image__preview">
-        {images &&
-          images.map((file, index) => (
+        {updatedImages &&
+          updatedImages.map((file, index) => (
             <ImagePreview key={index} file={file} remove={() => removeImage(index)} />
           ))}
       </div>
